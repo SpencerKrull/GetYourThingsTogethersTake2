@@ -3,6 +3,9 @@ const User = require("../models/user_model")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 const { response } = require('express')
+const Token = require('../models/token_model')
+const crypto = require('crypto')
+const sendEmail = require("../utilities/send_email")
 
 const tokenGenerate = (id) => {
     return jwt.sign({id}, process.env.JWT_SECRET, {expiresIn: "1d"}) // expires will end the token login in 24 hours
@@ -189,6 +192,58 @@ const changePassword = asyncHandler (async (req, res) => {
 
 // forgot password
 const forgotPassword = asyncHandler (async (req, res) => {
+    const { email } = req.body
+    const user = await User.findOne({email})
+
+    if (!user) {
+        res.status(404)
+        throw new Error("User not found")
+    }
+
+    // delete pre-existing tokens
+    let token = await Token.findOne({userId: user._id})
+    if (token) {
+        await token.deleteOne()
+    }
+
+    // reset token
+    let passwordReset = crypto.randomBytes(32).toString("hex") + user._id //crypto.randomBytes creates secure random data for encryption purposes, 32 is the number of bytes, toString(hex) creates hex numbers for the encryption
+    
+    //hash reset token
+    const tokenHashed = crypto.createHash("sha256").update(passwordReset).digest("hex") // SHA-256 is a hashing algorithm that outputs a value 256 bits long
+    //add token to mongo
+    await new Token({
+        userId: user._id,
+        token: tokenHashed,
+        created: Date.now(),
+        expires: Date.now() + 30 * (60 * 1000) // this is 30 minutes
+    }).save()
+
+    // reset url string
+    const urlReset = `${process.env.RESET_URL}/passwordreset/${passwordReset}`
+
+    // email reset
+    const message = `
+    <h2>Hello ${user.username}</h2>
+    <p>So ya forgot your password, huh? That's alright, click the link below to reset!</p>
+    <p>Do it quick, though! The link below will expire in 30 minutes.</p>
+    
+    <a href=${urlReset} clicktracking=off>${urlReset}</a>
+
+    <p>Best of luck getting it together!</p>`;
+
+    const subject = "Reset password for Get It Together"
+    const send_to = user.email
+    sent_from = process.env.EMAIL_USER
+
+    try {
+        await sendEmail(subject, message, send_to, sent_from)
+        res.status(200).json({success: true, message: "Reset email sent to user"})
+    } catch (error) {
+        res.status(500)
+        throw new Error("Email unsuccessful. Please try again!")
+    }
+
     res.send("Forgot password")
 })
 

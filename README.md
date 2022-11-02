@@ -36,5 +36,6 @@ https://react-hook-form.com/api/useform/handlesubmit/ - Troubleshooting between 
 https://blog.jonathanchannon.com/2013-08-24-async-route-handling-with-nancy/#:~:text=If%20you%20make%20your%20routes,likely%20hood%20of%20large%20queues. - Used for async/await routes. No code was really lifted from this, however wanted to make sure I was using it correctly for the routes, and that I was understanding the definitions. <br />
 https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault - Used in conjunction with async/await functions, in order to cancel any non-default happenings within the functions where it was used <br />
 https://dev.to/zenveus/routing-with-react-router-v6-6b1 - Troubleshooting why useHistory wouldn't work (it's useNavigate now, that's why!) <br />
-https://v5.reactrouter.com/web/api/BrowserRouter - Used to build the router for React-DOM. BrowserRouter keeps UI in sync with URLs.
-
+https://v5.reactrouter.com/web/api/BrowserRouter - Used to build the router for React-DOM. BrowserRouter keeps UI in sync with URLs.<br />
+https://nodemailer.com/message/ - Used for setting up Nodemailer. Wanted to follow along with both tutorial and official documentation to better understand how to get email forms to work <br />
+https://www.n-able.com/blog/sha-256-encryption#:~:text=SHA%2D256%20is%20used%20in,SHA%2D256%20for%20verifying%20transactions. - Researching the hash algorithms for the reset token. <br />
