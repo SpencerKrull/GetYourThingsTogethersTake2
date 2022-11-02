@@ -5,16 +5,18 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const user_route = require('./routes/user_route')
+const error = require('./middleware/error_middleware')
 
 // Initialization
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware
-app.use(express.json())
-app.use(express.urlencoded({ extended: false })) // handle data from url
-app.use(bodyParser.json()) 
-app.use("/api/users", user_route)
+app.use(express.json());
+app.use(express.urlencoded({ extended: false })); // handle data from url
+app.use(bodyParser.json());
+app.use("/api/users", user_route);
+app.use(error);
 
 // Routes
 app.get("/", (req, res) => {
