@@ -32,7 +32,7 @@ const user_schema = mongoose.Schema({
 })
 
 // Password encryption
-user_schema.pre("save", async function() {
+user_schema.pre("save", async function(next) {
     if (!this.isModified("password")) {
         return next()
     } // go to next function if password has not been modified
