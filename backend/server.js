@@ -4,6 +4,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const user_route = require('./routes/user_route')
 
 // Initialization
 const app = express();
@@ -13,6 +14,7 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json())
 app.use(express.urlencoded({ extended: false })) // handle data from url
 app.use(bodyParser.json()) 
+app.use("/api/users", user_route)
 
 // Routes
 app.get("/", (req, res) => {
