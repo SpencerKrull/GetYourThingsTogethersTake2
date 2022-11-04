@@ -39,3 +39,4 @@ https://dev.to/zenveus/routing-with-react-router-v6-6b1 - Troubleshooting why us
 https://v5.reactrouter.com/web/api/BrowserRouter - Used to build the router for React-DOM. BrowserRouter keeps UI in sync with URLs.<br />
 https://nodemailer.com/message/ - Used for setting up Nodemailer. Wanted to follow along with both tutorial and official documentation to better understand how to get email forms to work <br />
 https://www.n-able.com/blog/sha-256-encryption#:~:text=SHA%2D256%20is%20used%20in,SHA%2D256%20for%20verifying%20transactions. - Researching the hash algorithms for the reset token. <br />
+https://www.npmjs.com/package/multer - Used documentation to follow along with tutorial on how to set up image upload. Under file storage, code is from documentation; use is self-explanatory (file storage)

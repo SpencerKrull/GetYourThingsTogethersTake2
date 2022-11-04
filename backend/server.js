@@ -8,6 +8,7 @@ const user_route = require('./routes/user_route')
 const item_route = require('./routes/item_route')
 const error = require('./middleware/error_middleware')
 const cookie = require('cookie-parser') // attaches cookies to tags
+const path = require("path");
 
 // Initialization
 const app = express();
@@ -20,6 +21,7 @@ app.use(express.urlencoded({ extended: false })); // handle data from url
 app.use(bodyParser.json());
 app.use(cors());
 app.use(error);
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Routes
 app.use("/api/users", user_route)
