@@ -5,22 +5,26 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const user_route = require('./routes/user_route')
+const item_route = require('./routes/item_route')
 const error = require('./middleware/error_middleware')
 const cookie = require('cookie-parser') // attaches cookies to tags
 
 // Initialization
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 // Middleware
 app.use(express.json());
 app.use(cookie());
 app.use(express.urlencoded({ extended: false })); // handle data from url
 app.use(bodyParser.json());
-app.use("/api/users", user_route);
+app.use(cors());
 app.use(error);
 
 // Routes
+app.use("/api/users", user_route)
+app.use("/api/items", item_route)
+
 app.get("/", (req, res) => {
     res.send("Home")
 });
