@@ -207,10 +207,11 @@ const forgotPassword = asyncHandler (async (req, res) => {
     }
 
     // reset token
-    let passwordReset = crypto.randomBytes(32).toString("hex") + user._id //crypto.randomBytes creates secure random data for encryption purposes, 32 is the number of bytes, toString(hex) creates hex numbers for the encryption
-    
+    let tokenReset = crypto.randomBytes(32).toString("hex") + user._id //crypto.randomBytes creates secure random data for encryption purposes, 32 is the number of bytes, toString(hex) creates hex numbers for the encryption
+    console.log(tokenReset)
+
     //hash reset token
-    const tokenHashed = crypto.createHash("sha256").update(passwordReset).digest("hex") // SHA-256 is a hashing algorithm that outputs a value 256 bits long
+    const tokenHashed = crypto.createHash("sha256").update(tokenReset).digest("hex") // SHA-256 is a hashing algorithm that outputs a value 256 bits long
     //add token to mongo
     await new Token({
         userId: user._id,
@@ -220,7 +221,7 @@ const forgotPassword = asyncHandler (async (req, res) => {
     }).save()
 
     // reset url string
-    const urlReset = `${process.env.RESET_URL}/passwordreset/${passwordReset}`
+    const urlReset = `${process.env.FRONTEND_URL}/passwordreset/${tokenReset}`
 
     // email reset
     const message = `
@@ -243,8 +244,27 @@ const forgotPassword = asyncHandler (async (req, res) => {
         res.status(500)
         throw new Error("Email unsuccessful. Please try again!")
     }
-
-    res.send("Forgot password")
 })
 
-module.exports = { signUp, logIn, logOut, findUser, logStatus, userUpdate, changePassword, forgotPassword }
+//password reset
+const passwordReset = asyncHandler (async (req, res) => {
+    const {password} = req.body
+    const {tokenReset} = req.params
+
+    // hash token and compare to db
+    const tokenHashed = crypto.createHash("sha256").update(tokenReset).digest("hex")
+    const userToken = await Token.findOne({token: tokenHashed, expires: {$gt: Date.now()}}) // checks to see if time is greater than time token was hashed
+
+    if(!userToken) {
+        res.status(404)
+        throw new Error("Token is invalid or expired")
+    }
+
+    //find user if token still valid
+    const user = await User.findOne({_id: userToken.userId})
+    user.password = password
+    await user.save()
+    res.status(200).json({ message: "Password successfully reset! Time to log in!" })
+})
+
+module.exports = { signUp, logIn, logOut, findUser, logStatus, userUpdate, changePassword, forgotPassword, passwordReset }

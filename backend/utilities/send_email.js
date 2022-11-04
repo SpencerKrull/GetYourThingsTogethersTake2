@@ -4,8 +4,8 @@ const email = async (subject, message, send_to, sent_from, reply_to) => {
     // transporter sends react component outside rendering tree
     const transporter = nodemailer.createTransport({
         host: process.env.EMAIL_HOST,
-        post: 587,
-        auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASS},
+        port: 587,
+        auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASSWORD},
         tls: {  rejectUnauthorized: false } // provides data security sent between internet apps
         })
 
