@@ -13,7 +13,7 @@ const itemSchema = mongoose.Schema({
     edition: {type: String},
     barcode: {type: Number},
     quantity: {type: Number},
-    image: {type: Object}
+    image: {type: Object, default: {}}
 }, {timestamps: true})
 
 const Item = mongoose.model("Item", itemSchema)
