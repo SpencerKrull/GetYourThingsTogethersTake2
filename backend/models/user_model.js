@@ -42,4 +42,5 @@ userSchema.pre("save", async function(next) {
         this.password = hashed
 })
 
-module.exports = User = mongoose.model('user', userSchema)
+const User = mongoose.model('user', userSchema)
+module.exports = User

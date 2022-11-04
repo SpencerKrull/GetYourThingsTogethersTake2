@@ -235,7 +235,7 @@ const forgotPassword = asyncHandler (async (req, res) => {
 
     const subject = "Reset password for Get It Together"
     const send_to = user.email
-    sent_from = process.env.EMAIL_USER
+    const sent_from = process.env.EMAIL_USER
 
     try {
         await sendEmail(subject, message, send_to, sent_from)
