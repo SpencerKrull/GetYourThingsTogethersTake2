@@ -7,11 +7,17 @@ import SignUp from "./views/auth/signup"
 import Sidebar from "./components/sidebar/Sidebar";
 import Layout from "./components/layout/Layout";
 import Dash from "./views/dash/Dash";
+import axios from "axios";
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
+axios.defaults.withCredentials = true;
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
+    <ToastContainer />
+        <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<LogIn />} />
         <Route path="/signup" element={<SignUp />} />
