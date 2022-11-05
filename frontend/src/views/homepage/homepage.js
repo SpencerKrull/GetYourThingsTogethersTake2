@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import heroImage from "../../assets/cassettes.jpg"
+import heroImage from "../../assets/getittogether.jpg"
 // import "./home.scss"
 
 const Home = () => {
