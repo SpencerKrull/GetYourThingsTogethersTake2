@@ -10,10 +10,24 @@ import Dash from "./views/dash/Dash";
 import axios from "axios";
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { getLoginStatus } from "./services/authServices";
+import { SET_LOGIN } from "./redux/features/auth/auth_slice";
 
 axios.defaults.withCredentials = true;
 
 function App() {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    async function loginStatus() {
+      const status = await getLoginStatus()
+      dispatch(SET_LOGIN(status))
+    }
+    loginStatus()
+  }, [dispatch])
+
   return (
     <BrowserRouter>
     <ToastContainer />
@@ -22,7 +36,7 @@ function App() {
         <Route path="/login" element={<LogIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
-        <Route path="resetpassword/:tokenReset" element={<ResetPassword />} />
+        <Route path="/resetpassword/:tokenReset" element={<ResetPassword />} />
         <Route path="/dash" element={
           <Sidebar>
             <Layout>

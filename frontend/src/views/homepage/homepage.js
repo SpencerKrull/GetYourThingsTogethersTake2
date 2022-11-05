@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import heroImage from "../../assets/getittogether.jpg"
+import { ShowIfLoggedIn, ShowIfLoggedOut } from "../../components/status/hidelinks";
 // import "./home.scss"
 
 const Home = () => {
@@ -9,19 +10,25 @@ const Home = () => {
       <h1>Home Page</h1>
         <nav className="container flex-between">
             <ul className="nav-home">
+                <ShowIfLoggedOut>
                 <li>
                     <Link to="/signup">Sign Up</Link>
                 </li>
+                </ShowIfLoggedOut>
+                <ShowIfLoggedOut>
                 <li>
                     <button className="btn btn-primary">
                     <Link to="/login">Log In</Link>
                     </button>
                 </li>
+                </ShowIfLoggedOut>
+                <ShowIfLoggedIn>
                 <li>
                     <button className="btn btn-primary">
                         <Link to="/dash">Dash</Link>
                     </button>
                 </li>
+                </ShowIfLoggedIn> 
             </ul>
         </nav>
         <section className="container hero">
