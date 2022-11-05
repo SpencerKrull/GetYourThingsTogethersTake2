@@ -19,7 +19,7 @@ const Home = () => {
                 </li>
                 <li>
                     <button className="btn btn-primary">
-                        <Link to="/index">Index</Link>
+                        <Link to="/dash">Dash</Link>
                     </button>
                 </li>
             </ul>
