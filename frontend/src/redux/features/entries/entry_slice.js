@@ -25,6 +25,20 @@ export const createEntry = createAsyncThunk(
     }
 )
 
+//find all entries
+export const getEntries = createAsyncThunk(
+    "entries/findAll",
+    async (_, thunkAPI) => {
+        try {
+            return await entryService.getEntries()
+        } catch (error) {
+            const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+                console.log(message)
+                return thunkAPI.rejectWithValue(message)
+        }
+    }
+)
+
 const entrySlice = createSlice({
     name: "entry",
     initialState,
@@ -41,6 +55,7 @@ const entrySlice = createSlice({
             .addCase(createEntry.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.isSuccess = true;
+                state.isError = false;
                 console.log(action.payload)
                 state.entries.push(action.payload)
                 toast.success("You got this thing together!")
@@ -52,6 +67,23 @@ const entrySlice = createSlice({
                 console.log(action.payload)
                 state.entries.push(action.payload)
                 toast.error("You did not this thing together :/")
+            })
+            .addCase(getEntries.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(getEntries.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.isSuccess = true;
+                state.isError = false;
+                console.log(action.payload)
+                state.entries.push(action.payload)
+                state.entries = action.payload;
+            })
+            .addCase(getEntries.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isError = true;
+                state.message = action.payload;
+                toast.error(action.payload)
             })
     }
 })

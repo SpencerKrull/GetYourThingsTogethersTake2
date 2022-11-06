@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import EntryForm from '../../components/entryform/entryForm';
+import EntryForm from '../../components/entry/entryform/entryForm';
 import Loading from '../../components/loading/Loading';
 import { createEntry, selectIsLoading } from '../../redux/features/entries/entry_slice';
 

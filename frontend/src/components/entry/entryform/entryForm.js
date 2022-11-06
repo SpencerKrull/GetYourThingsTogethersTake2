@@ -2,7 +2,7 @@ import React from "react";
 import { FaProductHunt } from "react-icons/fa";
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
-import Card from "../card/Card";
+import Card from "../../card/Card";
 import './entryForm.scss'
 
 const EntryForm = ({
