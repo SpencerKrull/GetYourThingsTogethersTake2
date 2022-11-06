@@ -1,23 +1,26 @@
-# Get Your S#!t Together
+# Disclaimer
+This code is incomplete, undeployed, and in need of my own personal styling. There are still numerous bugs to fix, as well as features to update. Further functionality will include the ability to update the items properly. However, have spent several hours on trying to figure out why the functionality to enter items is no longer working.
 
-Get Your S#!t Together is a cataloguing app, allowing you to store inventory of your personal entrys all in one place!
+# Get Your Things Together
+
+Get Your Things Together is a cataloguing app, allowing you to store inventory of your personal entrys all in one place!
 
 Are you a collector of physical media, and found yourself overwhelmed by how much crap you own? I sure am, and am tired of using Google sheets and DEFINITELY don't want to use a paid database app (seriously, why do those exist?).
 
-Get Your S#!t Together combines the likeability of anything free with the foul-mouthed anxiety of simply just having too many things to keep track of. Can be used for standard cataloguing, an insurance rider, or simply for fun, just as long as you get your s#!t together!
+Get Your Things Together combines the likeability of anything free with the foul-mouthed anxiety of simply just having too many things to keep track of. Can be used for standard cataloguing, an insurance rider, or simply for fun, just as long as you get your s#!t together!
 
 ## How to Use
-It's as simple as typing! Just enter the entry's information into the correct fields, and click submit. Nothing more simple than that! For die-hard collectors, you can also add scores and comments to each entry (this is especially great for you review TikTokers!). 
+It's as simple as typing! Just enter the entry's information into the correct fields, and click submit. Nothing more simple than that! For die-hard collectors, you can also add comments to each entry using a freetext editor. 
 
 ## More to Come!
 This is simply version 1 of what could come! Future functionality will include individualized lists for each entry (you'll finally be able to keep your books, music, and whanot away from each other). 
 
 Looking at the app, and forget what your entry looks like? Don't worry, picture functionality will also be here soon!
 
-Finally, do I smell the ability to enter the barcode and have all the information populated? Or is that just the stench of all the s#!t we've gotten together?
+My biggest goal for this app is to have the ability to enter the barcode of an item, and have that populate all the other required fields.
 
 ## Technologies
-GYST is built using Node Express and React, interacting with the PostgreSQL database and Sequelize language. Deployed using Heroku.
+GYST is built using Node Express and React, interacting with the Mongo Database.
 
 ## Sources used for code:
 https://sequelize.org/docs/v6/core-concepts/model-basics/ - Used when setting up sequelize models; ultimately used the automated models method to auto-generate, then edited the necessary information as needed <br />

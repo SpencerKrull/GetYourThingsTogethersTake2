@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import EntryList from "../../components/entry/entryList/EntryList";
+import EntrySummary from "../../components/entry/entrySummary/EntrySummary";
 import useRedirectLogout from "../../customhook/useRedirectLogout";
 import { selectIsLoggedIn } from "../../redux/features/auth/auth_slice";
 import { getEntries } from "../../redux/features/entries/entry_slice";
@@ -24,7 +25,7 @@ const Dash = () => {
 
     return (
         <div>
-            <h2>Dash</h2>
+            <EntrySummary entries={entries} />
             <EntryList entries={entries} isLoading={isLoading} />
         </div>
     )
