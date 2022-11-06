@@ -2,11 +2,10 @@ const asyncHandler = require('express-async-handler')
 const Entry = require('../models/entry_model')
 const { fileSizeFormatter } = require('../utilities/upload_image')
 const cloudinary = require("cloudinary");
-const { response } = require('express');
 
 // enter entry into db
 const makeEntry = asyncHandler (async (req, res) => {
-    const { title,  author, format, release, edition, barcode, quantity } = req.body
+    const { title,  author, format, release, edition, barcode, quantity, notes } = req.body
     if (!title || !author || !format) {
         res.status(404).json()
         throw new Error("Please fill in all required fields")
@@ -34,7 +33,7 @@ const makeEntry = asyncHandler (async (req, res) => {
     // create entry
     const entry = await Entry.create({
         user: req.user.id,
-        title, author, format, release, edition, barcode, quantity, image: fileData
+        title, author, format, release, edition, barcode, quantity, image: fileData, notes
     })
 
     res.status(201).json(entry)
@@ -81,7 +80,7 @@ const deleteEntry = asyncHandler (async (req, res) => {
 
 // Update entries
 const updateEntry = asyncHandler (async (req, res) => {
-    const { title, author, format, release, edition, quantity, barcode } = req.body
+    const { title, author, format, release, edition, quantity, barcode, notes } = req.body
     const {id} = req.params
 
     const entry = await entry.findById(id)
@@ -116,7 +115,7 @@ const updateEntry = asyncHandler (async (req, res) => {
     }
 
     // update entry
-    const updatedEntry = await entry.findByIdAndUpdate({_id: id}, {title, author, format, release, edition, quantity, barcode, 
+    const updatedEntry = await entry.findByIdAndUpdate({_id: id}, {title, author, format, release, edition, quantity, barcode, notes,
         image: Object.keys(fileData).length === 0 ? entry?.image : fileData}, {new: true, runValidators: true}) // pulls fields that need updates, lets them be updated, and validates
 
     res.status(200).json(updatedEntry)

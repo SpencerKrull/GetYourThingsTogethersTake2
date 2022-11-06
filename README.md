@@ -42,3 +42,4 @@ https://www.n-able.com/blog/sha-256-encryption#:~:text=SHA%2D256%20is%20used%20i
 https://www.npmjs.com/package/multer - Used documentation to follow along with tutorial on how to set up image upload. Under file storage, code is from documentation; use is self-explanatory (file storage) <br />
 https://www.youtube.com/watch?v=CXa0f4-dWi4 - Tutorial on making sidebar components with React <br />
 https://react-icons.github.io/react-icons/search?q=expandmore <br />
+https://www.youtube.com/watch?v=xEeFZ1z6Maw - used when setting up slices for auth & entries

@@ -13,7 +13,8 @@ const entrySchema = mongoose.Schema({
     edition: {type: String},
     barcode: {type: Number},
     quantity: {type: Number},
-    image: {type: Object, default: {}}
+    image: {type: Object, default: {}},
+    notes: {type: String}
 }, {timestamps: true})
 
 const Entry = mongoose.model("Entry", entrySchema)

@@ -14,6 +14,7 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getLoginStatus } from "./services/authServices";
 import { SET_LOGIN } from "./redux/features/auth/auth_slice";
+import AddEntry from "./views/addEntry/AddEntry";
 
 axios.defaults.withCredentials = true;
 
@@ -41,6 +42,13 @@ function App() {
           <Sidebar>
             <Layout>
               <Dash />
+            </Layout>
+          </Sidebar>
+        } />
+      <Route path="/enter-item" element={
+          <Sidebar>
+            <Layout>
+              <AddEntry />
             </Layout>
           </Sidebar>
         } />
